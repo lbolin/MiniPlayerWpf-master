@@ -18,7 +18,11 @@ namespace MiniPlayerWpf
         public MusicLib()
         // Adds a song to the music library and returns the song's ID. The song
         // parameter's ID is also set to the auto-generated ID.
-        {; }
+        {
+            musicDataSet = new DataSet();
+            musicDataSet.ReadXmlSchema("music.xsd");
+            musicDataSet.ReadXml("music.xml");
+        }
         public EnumerableRowCollection<string> SongIds
         {
             get
@@ -66,7 +70,7 @@ namespace MiniPlayerWpf
         public Song GetSong(int songId)
         // Update the given song with the given song ID. Returns true if the song
         // was updated, false if it could not because the song ID was not found.
-        {; }
+        {; return null; }
         public bool UpdateSong(int songId, Song song)
     // Delete a song given the song's ID. Return true if the song was
     // successfully deleted, false if the song ID was not found.
@@ -84,11 +88,34 @@ namespace MiniPlayerWpf
                 row["filename"] = song.Filename; //filenameTextBox.Text;
 
                 song.Id = Convert.ToInt32(row["id"]);
-                return songId;
+                return true;
         }
+            return false;
     }
         public bool DeleteSong(int songId)
-        {}
+        {
+            bool isDeleted = false;
+
+            DataTable table = musicDataSet.Tables["song"];
+            table.Rows.Remove(table.Rows.Find(songId));
+
+            List<DataRow> rows = new List<DataRow>();
+            table = musicDataSet.Tables["playlist_song"];
+            foreach (DataRow row in table.Rows)
+                if (row["song_id"].ToString() == songId.ToString())
+                    rows.Add(row);
+
+            foreach (DataRow row in rows)
+            {
+                row.Delete();
+                isDeleted = true;
+            }
+
+
+
+            return isDeleted;
+
+        }
         // Save the song database to the music.xml file
         public void Save()
         {
