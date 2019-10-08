@@ -173,7 +173,7 @@ namespace MiniPlayerWpf
             (songIdComboBox.ItemsSource as ObservableCollection<string>).Add(id);
             songIdComboBox.SelectedIndex = songIdComboBox.Items.Count - 1;
             // There is at least one song that can be deleted
-            deleteButton.IsEnabled = true; ue;
+            deleteButton.IsEnabled = true; 
         }
 
         private void UpdateCommand_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -264,7 +264,7 @@ namespace MiniPlayerWpf
             // Save music.xml in the same directory as the exe
             string filename = "music.xml";
             Console.WriteLine("Saving " + filename);
-            musicDataSet.WriteXml(filename);
+            musicLib.Save();
         }
     }
 }

@@ -29,7 +29,7 @@ namespace MiniPlayerWpf
                 return ids;
             }
         }
-       private void PrintAllTables()
+       public void PrintAllTables()
         {
             foreach (DataTable table in musicDataSet.Tables)
             {
@@ -68,13 +68,32 @@ namespace MiniPlayerWpf
         // was updated, false if it could not because the song ID was not found.
         {; }
         public bool UpdateSong(int songId, Song song)
-        // Delete a song given the song's ID. Return true if the song was
-        // successfully deleted, false if the song ID was not found.
-        {; }
+    // Delete a song given the song's ID. Return true if the song was
+    // successfully deleted, false if the song ID was not found.
+    {
+        DataTable table = musicDataSet.Tables["song"];
+
+        // Only one row should be selected
+        foreach (DataRow row in table.Select("id=" + songId))
+        {
+                row["title"] = song.Title;  //titleTextBox.Text;
+                row["artist"] = song.Artist; // artistTextBox.Text;
+                row["album"] = song.Album;//albumTextBox.Text;
+                row["genre"] = song.Genre; //genreTextBox.Text;
+                row["length"] = song.Length;//lengthTextBox.Text;
+                row["filename"] = song.Filename; //filenameTextBox.Text;
+
+                song.Id = Convert.ToInt32(row["id"]);
+                return songId;
+        }
+    }
         public bool DeleteSong(int songId)
-        {; }
+        {}
         // Save the song database to the music.xml file
         public void Save()
-        {; }
+        {
+            string filename = "music.xml";
+            musicDataSet.WriteXml(filename);
+        }
     }
 }
