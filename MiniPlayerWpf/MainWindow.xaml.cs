@@ -181,18 +181,7 @@ namespace MiniPlayerWpf
             string songId = songIdComboBox.SelectedItem.ToString();
             Console.WriteLine("Updating song " + songId);
 
-            DataTable table = musicDataSet.Tables["song"];
-
-            // Only one row should be selected
-            foreach (DataRow row in table.Select("id=" + songId))
-            {
-                row["title"] = titleTextBox.Text;
-                row["artist"] = artistTextBox.Text;
-                row["album"] = albumTextBox.Text;
-                row["genre"] = genreTextBox.Text;
-                row["length"] = lengthTextBox.Text;
-                row["filename"] = filenameTextBox.Text;
-            }
+           //TO DO: Use MusicLib Udate
         }
 
         private void UpdateCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
