@@ -114,7 +114,7 @@ namespace MiniPlayerWpf
                 //DataTable table = musicDataSet.Tables["song"];
 
                 // Only one row should be selected
-                foreach ()
+                foreach(DataRow row )
                 {
                     titleTextBox.Text = row["title"].ToString();
                     artistTextBox.Text = row["artist"].ToString();

@@ -70,7 +70,8 @@ namespace MiniPlayerWpf
         public Song GetSong(int songId)
         // Update the given song with the given song ID. Returns true if the song
         // was updated, false if it could not because the song ID was not found.
-        {; return null; }
+        {
+        }
         public bool UpdateSong(int songId, Song song)
     // Delete a song given the song's ID. Return true if the song was
     // successfully deleted, false if the song ID was not found.
