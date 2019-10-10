@@ -51,6 +51,9 @@ namespace MiniPlayerWpf
                 Console.WriteLine();
             }
         }
+
+       
+
         public int AddSong(Song song)
         // Return a Song for the given song ID or null if no song was not found.
         {
@@ -71,6 +74,7 @@ namespace MiniPlayerWpf
         // Update the given song with the given song ID. Returns true if the song
         // was updated, false if it could not because the song ID was not found.
         {
+
         }
         public bool UpdateSong(int songId, Song song)
     // Delete a song given the song's ID. Return true if the song was
